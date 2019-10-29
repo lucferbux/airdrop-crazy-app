@@ -1,0 +1,60 @@
+[
+      {
+        "mac": "4B:D1:47:B1:37:FF",
+         "airdrop":"-",
+         "data":"0198791fb1",
+         "device":"Watch",
+         "header":"1102011a020a180a",
+         "os":"WatchOS",
+         "rssi":-79,
+         "state":"-",
+         "hash1": "123s",
+         "hash2": "133e",
+         "time":1571397152
+      },
+      {
+        "mac": "5A:8B:76:E7:72:6B",
+         "airdrop":"-",
+         "data":"0714277957",
+         "device":"Homepod",
+         "header":"0e02011a0a",
+         "os":"iOS",
+         "rssi":-87,
+         "state":"-",
+         "time":1571397153
+      },
+      {
+          "mac": "72:7B:EC:1A:D0:08",
+         "airdrop":"Off",
+         "data":"1a1e770e0d32",
+         "device":"iPhone",
+         "header":"1202011a020a0c0b",
+         "os":"iOS13",
+         "rssi":-50,
+         "state":"Off",
+         "time":1571397152
+      },
+      {
+        "mac" : "74:6E:24:00:1D:BF",
+         "airdrop":"Off",
+         "data":"031c569041",
+         "device":"iPad",
+         "header":"1102011a020a0c0a",
+         "os":"iOS13",
+         "rssi":-65,
+         "state":"Off",
+         "time":1571397152
+      },
+      {
+        "mac": "88:E9:FE:7E:A2:1A",
+         "airdrop":"On",
+         "data":"4b1c3a813f",
+         "device":"MacBook",
+         "header":"0e0201060a",
+         "os":"macOS",
+         "rssi":-63,
+         "state":"Home screen",
+         "time":1571397153
+      }
+   ]
+

@@ -49,6 +49,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E94B86B32368D87500A38054 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E96B2C472360A5EC00EEFE7A /* QrScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrScanner.swift; sourceTree = "<group>"; };
 		E96B2C492360A63200EEFE7A /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 		E96F5B8723560A7C00DAB977 /* Airdrop Tool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Airdrop Tool.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -115,6 +116,7 @@
 		E96F5B7E23560A7B00DAB977 = {
 			isa = PBXGroup;
 			children = (
+				E94B86B32368D87500A38054 /* README.md */,
 				E96F5B8923560A7C00DAB977 /* Airdrop Tool */,
 				E96F5BA023560A7D00DAB977 /* Airdrop ToolTests */,
 				E96F5BAB23560A7D00DAB977 /* Airdrop ToolUITests */,

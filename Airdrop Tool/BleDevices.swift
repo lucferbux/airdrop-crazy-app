@@ -51,7 +51,7 @@ struct BleDevices: View {
 struct Header: View {
     var body: some View {
         HStack {
-            Text("BlueHack")
+            Text("Aidrop Crazy")
                 .font(.title)
                 .fontWeight(.bold)
             Spacer()

@@ -35,13 +35,18 @@ struct AirdropDevices: View {
             
             VStack {
                 ScrollView(.vertical) {
-                    ForEach(peopleList.people) { person in
+                    ForEach(peopleList.people.filter { person in
+                        
+                        !person.number.isEmpty
+                        
+                    }) { person in
                         CardPersonExpand(person: person)
                             .frame(maxWidth: .infinity, minHeight: 220)
-                            .padding(.top, 20)
+                            .padding(.top, 25)
                     }
                 }
             }
+           
         }
         .background(Color("background"))
         .edgesIgnoringSafeArea(.all)

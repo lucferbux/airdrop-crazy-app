@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E927EB0F237A93F7000CB478 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E927EB0E237A93F7000CB478 /* MenuView.swift */; };
 		E96B2C482360A5EC00EEFE7A /* QrScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96B2C472360A5EC00EEFE7A /* QrScanner.swift */; };
 		E96B2C4A2360A63200EEFE7A /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96B2C492360A63200EEFE7A /* ScannerViewController.swift */; };
 		E96F5B8B23560A7C00DAB977 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96F5B8A23560A7C00DAB977 /* AppDelegate.swift */; };
@@ -49,10 +50,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E927EB0E237A93F7000CB478 /* MenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		E94B86B32368D87500A38054 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E96B2C472360A5EC00EEFE7A /* QrScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrScanner.swift; sourceTree = "<group>"; };
 		E96B2C492360A63200EEFE7A /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
-		E96F5B8723560A7C00DAB977 /* Airdrop Tool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Airdrop Tool.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E96F5B8723560A7C00DAB977 /* Airdrop Crazy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Airdrop Crazy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E96F5B8A23560A7C00DAB977 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E96F5B8C23560A7C00DAB977 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		E96F5B8E23560A7C00DAB977 /* BleDevices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleDevices.swift; sourceTree = "<group>"; };
@@ -127,7 +129,7 @@
 		E96F5B8823560A7C00DAB977 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E96F5B8723560A7C00DAB977 /* Airdrop Tool.app */,
+				E96F5B8723560A7C00DAB977 /* Airdrop Crazy.app */,
 				E96F5B9D23560A7D00DAB977 /* Airdrop ToolTests.xctest */,
 				E96F5BA823560A7D00DAB977 /* Airdrop ToolUITests.xctest */,
 			);
@@ -145,6 +147,7 @@
 				E96B2C472360A5EC00EEFE7A /* QrScanner.swift */,
 				E96F5B8A23560A7C00DAB977 /* AppDelegate.swift */,
 				E96F5B8C23560A7C00DAB977 /* SceneDelegate.swift */,
+				E927EB0E237A93F7000CB478 /* MenuView.swift */,
 				E96F5B8E23560A7C00DAB977 /* BleDevices.swift */,
 				E9986234236604FC0069B4C7 /* CardPersonExpand.swift */,
 				E989858923621810008A4374 /* CardDetailExpand.swift */,
@@ -231,7 +234,7 @@
 				E9A97571235A0AB400D1DBB9 /* SocketIO */,
 			);
 			productName = "Airdrop Tool";
-			productReference = E96F5B8723560A7C00DAB977 /* Airdrop Tool.app */;
+			productReference = E96F5B8723560A7C00DAB977 /* Airdrop Crazy.app */;
 			productType = "com.apple.product-type.application";
 		};
 		E96F5B9C23560A7D00DAB977 /* Airdrop ToolTests */ = {
@@ -360,6 +363,7 @@
 				E96B2C482360A5EC00EEFE7A /* QrScanner.swift in Sources */,
 				E96B2C4A2360A63200EEFE7A /* ScannerViewController.swift in Sources */,
 				E96F5B8D23560A7C00DAB977 /* SceneDelegate.swift in Sources */,
+				E927EB0F237A93F7000CB478 /* MenuView.swift in Sources */,
 				E99BCE6423588DEB00D8D2EA /* Device.swift in Sources */,
 				E989858A23621810008A4374 /* CardDetailExpand.swift in Sources */,
 				E96F5B8F23560A7C00DAB977 /* BleDevices.swift in Sources */,
@@ -533,12 +537,13 @@
 				DEVELOPMENT_TEAM = E3WR764V5V;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Airdrop Tool/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.lucferbux.Airdrop-Tool";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Airdrop Crazy";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -553,12 +558,13 @@
 				DEVELOPMENT_TEAM = E3WR764V5V;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Airdrop Tool/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.lucferbux.Airdrop-Tool";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Airdrop Crazy";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

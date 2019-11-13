@@ -1,5 +1,5 @@
 # Airdrop Crazy
-> App to display the status of the nearby Apple devices and extract info with Aidrop hack
+> App to display the status of the nearby Apple devices and extract info with Airdrop hack
 
 [![Swift Version][swift-image]][swift-url]
 [![License][license-image]][license-url]
@@ -49,7 +49,7 @@ com.yourdomain.Lister
 
 ## Contribute
 
-We would love you for the contribution to **Aidrop Crazy**, check the ``LICENSE`` file for more info.
+We would love you for the contribution to **Airdrop Crazy**, check the ``LICENSE`` file for more info.
 
 ## Meta
 

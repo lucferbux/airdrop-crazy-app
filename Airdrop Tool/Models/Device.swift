@@ -37,6 +37,8 @@ struct Device: Hashable, Codable, Identifiable, SocketData {
         return "homepod"
         case "Watch":
             return "watch"
+        case "iPhone/iPad":
+            return "iphoneipad"
         default:
             return "iphone"
         }

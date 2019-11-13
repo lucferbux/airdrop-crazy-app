@@ -33,7 +33,7 @@ struct DetailPerson: View {
             
             VStack {
                 HStack {
-                    Text(person.name)
+                    Text(!person.name.isEmpty ? person.name : "Unknown")
                         .foregroundColor(Color.gray)
                         .padding(.top, 10)
                     Spacer()

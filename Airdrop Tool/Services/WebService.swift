@@ -12,7 +12,7 @@ import SocketIO
 
 /// Web Service connection class
 class WebService {
-    
+    static let sharedInstance = WebService()
     var socket: SocketIOClient!
     var manager: SocketManager!
     
@@ -47,6 +47,14 @@ class WebService {
         }
 
         self.socket.connect()
+    }
+    
+    func establishConnection() {
+        socket?.connect()
+    }
+    
+    func closeConnection() {
+        socket?.disconnect()
     }
     
     

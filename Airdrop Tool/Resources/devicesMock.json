@@ -27,11 +27,22 @@
           "mac": "72:7B:EC:1A:D0:08",
          "airdrop":"Off",
          "data":"1a1e770e0d32",
-         "device":"iPhone",
+         "device":"iPhone/iPad",
          "header":"1202011a020a0c0b",
          "os":"iOS13",
          "rssi":-50,
          "state":"Off",
+         "time":1571397152
+      },
+      {
+          "mac": "72:7B:EC:1A:D1:08",
+         "airdrop":"On",
+         "data":"1a1e770e3w32",
+         "device":"iPhone",
+         "header":"1202012d020a0c0b",
+         "os":"iOS13",
+         "rssi":-30,
+         "state":"Calling...",
          "time":1571397152
       },
       {

@@ -8,13 +8,33 @@
 
 import SwiftUI
 
+extension Array {
+    func chunked(into size: Int) -> [[Element]] {
+        return stride(from: 0, to: count, by: size).map {
+            Array(self[$0 ..< Swift.min($0 + size, count)])
+        }
+    }
+}
+
 struct BleDevices: View {
     @ObservedObject var devicesList = ResultViewModel()
     @State var menuFilter: [Menu] = ResultViewModel().menu
+    @State var viewState = CGSize.zero
     @State var spin = false
     var devices: Devices = [] // Mockup data
+    var devicesFiltered: Devices {
+        self.devicesList.devices.filter { device in
+            
+            menuFilter.first(where: {
+                $0.title == device.device
+            })?.enabled ?? false
+            
+        }
+    }
+    
+    
     @State var show = false
-       
+    
     func refreshView() {
         self.devicesList.updateSession()
     }
@@ -28,26 +48,30 @@ struct BleDevices: View {
                         .padding(.top, 50)
                         .offset(x: 43)
                     
-                    ForEach(devicesList.devices.filter { device in
-
-                        menuFilter.first(where: {
-                            $0.title == device.device
-                        })?.enabled ?? false
-
+                    if(UIScreen.main.bounds.width < 600) {
+                        ForEach(devicesFiltered) { device in
+                            CardDetailExpand(device: device)
                         }
-
-                    ) { device in
-                        CardDetailExpand(device: device)
+                    } else {
+                        ForEach(devicesFiltered.chunked(into: 2), id: \.self){ devChunked in
+                            HStack(spacing: 100) {
+                                ForEach(devChunked) { dev in
+                                    CardDetailExpand(device: dev)
+                                }
+                            }
+                        }
+                        
                     }
                     
+                                        
+                    
+                    
+                    Spacer()
+                    
                 }
-                
-                Spacer()
+                .blur(radius: show ? 100 : 0)
                 
             }
-            .blur(radius: show ? 100 : 0)
-           
-            
             
             
             
@@ -61,45 +85,57 @@ struct BleDevices: View {
             
             
             MenuButton(show: $show)
-            .blur(radius: 0)
-            .animation(.default)
+                .blur(radius: 0)
+                .animation(.default)
             
             
             MenuView(menu: $menuFilter)
+                
+                .offset(x: viewState.width)
                 .rotation3DEffect(Angle(degrees: show ? 0 : 60), axis: (x: 0, y: 10.0, z: 0))
                 .animation(.easeInOut(duration: 0.3))
                 .offset(x: show ? 0 : -UIScreen.main.bounds.width)
-                .onTapGesture {
-                    self.show.toggle()
-            }
+//                .onTapGesture {
+//                    self.show.toggle()
+//                }
+                .gesture(
+                    DragGesture()
+                    .onChanged { value in
+                        self.viewState = value.translation
+                    }
+                    .onEnded { value in
+                        if self.viewState.width < 100 {
+                            self.show = false
+                        }
+                        self.viewState = .zero
+                    }
+                )
             
             
             
-
-           if(devicesList.loading) {
+            
+            if(devicesList.loading) {
                 BlurView(style: .systemThinMaterial)
                     .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-            VStack {
-                Image(systemName: "arrow.2.circlepath.circle.fill")
+                VStack {
+                    Image(systemName: "arrow.2.circlepath.circle.fill")
                         .resizable()
                         .frame(width: 90, height: 90)
                         .rotationEffect(.degrees(spin ? 360 : 0))
                         .animation(Animation.easeIn(duration: 0.8).repeatForever(autoreverses: true))
                         .onAppear() {
                             self.spin.toggle()
+                    }
+                    Button(action: {
+                        self.devicesList.loading = false
+                    }) {
+                        Text("Cancelar")
+                            .font(.headline)
+                            .fontWeight(.bold)
+                    }
+                    .padding()
                 }
-                Button(action: {
-                    self.devicesList.loading = false
-                }) {
-                    Text("Cancelar")
-                        .font(.headline)
-                        .fontWeight(.bold)
-                        .foregroundColor(Color.red)
-                    
-                }
-                .padding()
             }
-           }
             
             
         }
@@ -113,7 +149,7 @@ struct BleDevices: View {
         .onAppear {
             self.refreshView()
         }
-
+        
     }
 }
 
@@ -220,29 +256,29 @@ struct QrCodeView: View {
     
     var body: some View {
         HStack {
-//            if(devicesList.devices.isEmpty) {
-                VStack {
-                    Image(systemName: "qrcode")
-                        .resizable()
-                        .padding(10)
-                    
+            //            if(devicesList.devices.isEmpty) {
+            VStack {
+                Image(systemName: "qrcode")
+                    .resizable()
+                    .padding(10)
+                
+            }
+            .foregroundColor(.white)
+            .frame(width: 44, height: 44)
+            .background(Color("primary"))
+            .cornerRadius(20)
+            .padding(.trailing, 10)
+            .shadow(color: Color("buttonShadow"), radius: 10, x: 0, y: 10)
+            .onTapGesture {
+                self.showQR.toggle()
+            }
+            .gesture(
+                LongPressGesture(minimumDuration: 1.5)
+                    .onEnded { _ in
+                        self.devicesList.loading = true
+                        self.devicesList.updateSession()
                 }
-                .foregroundColor(.white)
-                .frame(width: 44, height: 44)
-                .background(Color("primary"))
-                .cornerRadius(20)
-                .padding(.trailing, 10)
-                .shadow(color: Color("buttonShadow"), radius: 10, x: 0, y: 10)
-                .onTapGesture {
-                    self.showQR.toggle()
-                }
-                .gesture(
-                    LongPressGesture(minimumDuration: 1.5)
-                        .onEnded { _ in
-                            self.devicesList.loading = true
-                            self.devicesList.updateSession()
-                    }
-                )
+            )
                 .sheet(isPresented: self.$showQR) {
                     QRCodeScan() { (url) in
                         self.devicesList.loading = true
@@ -252,9 +288,9 @@ struct QrCodeView: View {
                         }
                         
                     }
-                }
-                
-//            }
+            }
+            
+            //            }
         }
     }
 }

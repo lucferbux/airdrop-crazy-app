@@ -40,7 +40,7 @@ struct Device: Hashable, Codable, Identifiable, SocketData {
         case "iPhone/iPad":
             return "iphoneipad"
         default:
-            return "iphone"
+            return "iphoneipad"
         }
     }
     

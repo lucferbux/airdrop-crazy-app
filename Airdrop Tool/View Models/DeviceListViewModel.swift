@@ -18,12 +18,12 @@ final class ResultViewModel: ObservableObject {
     private lazy var webService: WebService = WebService()
     static let sharedInstance = ResultViewModel()
     @Published var devices: Devices = []
+    @Published var menu: [Menu] = menuData
     @Published var people: People = []
     @Published var error: Bool = false
     @Published var loading: Bool = false
-    @Published var menu: [Menu] = menuData
     
-    
+
     init() {}
     
     

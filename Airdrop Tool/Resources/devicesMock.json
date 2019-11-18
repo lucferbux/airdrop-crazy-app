@@ -66,6 +66,17 @@
          "rssi":-63,
          "state":"Home screen",
          "time":1571397153
+      },
+      {
+        "mac": "37:E9:FE:7E:A2:1A",
+         "airdrop":"On",
+         "data":"4b1c3a813f",
+         "device":"Homepod",
+         "header":"0e0201060a",
+         "os":"macOS",
+         "rssi":-63,
+         "state":"Home screen",
+         "time":1571397153
       }
    ]
 

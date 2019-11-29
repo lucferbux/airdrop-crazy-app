@@ -68,6 +68,50 @@
          "time":1571397153
       },
       {
+        "mac": "37:E9:FE:3W:A2:1A",
+         "airdrop":"Of",
+         "data":"4b1c3w313f",
+         "device":"iPhone",
+         "header":"0e0201230a",
+         "os":"iOS13",
+         "rssi":-63,
+         "state":"Locked",
+         "time":1571397153
+      },
+      {
+        "mac": "37:R2:FE:7E:A2:1A",
+         "airdrop":"On",
+         "data":"4b1c3a813f",
+         "device":"MacBook",
+         "header":"0e2201060a",
+         "os":"macOS",
+         "rssi":-63,
+         "state":"Home screen",
+         "time":1571397153
+      },
+      {
+        "mac": "32:E9:FE:7E:A2:1A",
+         "airdrop":"-",
+         "data":"4b1c3a813f",
+         "device":"AirPods",
+         "header":"0e0201060a",
+         "os":"iOS",
+         "rssi":-63,
+         "state":"-",
+         "time":1571397153
+      },
+      {
+        "mac": "37:E9:FE:2L:A2:1B",
+         "airdrop":"On",
+         "data":"4b1c3a813f",
+         "device":"iPhone/iPad",
+         "header":"0e0201060a",
+         "os":"iOS13",
+         "rssi":-63,
+         "state":"Locked",
+         "time":1571397153
+      },
+      {
         "mac": "37:E9:FE:7E:A2:1A",
          "airdrop":"On",
          "data":"4b1c3a813f",
@@ -77,6 +121,51 @@
          "rssi":-63,
          "state":"Home screen",
          "time":1571397153
+      },
+      {
+        "mac": "37:E9:FE:7E:A2:3A",
+         "airdrop":"On",
+         "data":"4b1c3a813f",
+         "device":"MacBook",
+         "header":"0e0201060a",
+         "os":"macOS",
+         "rssi":-63,
+         "state":"Home screen",
+         "time":1571397153
+      },
+      {
+        "mac": "37:E9:EE:LE:A2:1A",
+         "airdrop":"Off",
+         "data":"4b1c3a813f",
+         "device":"iPad",
+         "header":"0e2201060a",
+         "os":"iOS13",
+         "rssi":-63,
+         "state":"Lock screen",
+         "time":1571397153
+      },
+      {
+        "mac": "12:E9:FE:7E:A3:1A",
+         "airdrop":"On",
+         "data":"4b1c3a813f",
+         "device":"iPhone",
+         "header":"0e0201060a",
+         "os":"iOS13",
+         "rssi":-63,
+         "state":"Calling",
+         "time":1571397153
+      },
+      {
+        "mac": "22:E9:FE:RE:A2:1A",
+         "airdrop":"On",
+         "data":"4b1c3a813f",
+         "device":"Homepod",
+         "header":"0e0201060a",
+         "os":"macOS",
+         "rssi":-63,
+         "state":"Home screen",
+         "time":1571397153
       }
+      
    ]
 

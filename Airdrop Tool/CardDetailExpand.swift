@@ -14,13 +14,23 @@ struct CardDetailExpand: View {
     var body: some View {
         ZStack {
             
-            
+            HStack {
+            Spacer()
             DetailImage(image: device.getImage())
-            .offset(x: 40, y: 0)
+            }
             
-            DetailDevice(device: device)
-            .offset(x: -40, y: 0)
+            HStack {
+                DetailDevice(device: device)
+                           
+            Spacer()
+            
+            }
+            
+           
         }
+        .frame(minWidth: 180,  maxWidth:360)
+        
+        
     }
 }
 
@@ -53,7 +63,6 @@ struct DetailDevice: View {
                     
                     VStack {
                         DevicePropExp(title: "RSSI", icon: "location", status: String(device.rssi))
-                        
                         DevicePropExp(title: "Status", icon: "questionmark.circle", status: device.state)
                     }
                     
@@ -62,7 +71,7 @@ struct DetailDevice: View {
                 Spacer()
             }
         }
-        .frame(minWidth: 200,  maxWidth:250, minHeight: 200, maxHeight: 200)
+        .frame(minWidth: 150,  maxWidth:250, minHeight: 200, maxHeight: 200)
         .padding(.horizontal)
         .padding(.vertical, 10)
     }
@@ -79,7 +88,7 @@ struct DevicePropExp: View {
         HStack {
             Image(systemName: icon)
                 .imageScale(.large)
-                .frame(width: 32, height: 32)
+                .frame(minWidth: 30,  maxWidth:33, minHeight: 30, maxHeight: 33)
                 .foregroundColor(.white)
                 .background(Color("button"))
                 .cornerRadius(12)
@@ -92,7 +101,7 @@ struct DevicePropExp: View {
                 Text(status)
                     .font(.caption)
             }
-            .frame(width: 70, height: 50, alignment: .leading)
+            .frame(minWidth: 55,  maxWidth:70, minHeight: 50, maxHeight: 50, alignment: .leading)
         }
     }
 }
@@ -111,13 +120,14 @@ struct DetailImage: View {
                 Spacer()
                 Image(image)
                     .resizable()
+
                     .offset(x: 50, y: 0)
                     .frame(width: 135, height: 135, alignment: .trailing)
                 .mask(RoundedRectangle(cornerRadius: 0))
                 
             }
         }
-        .frame(minWidth: 200,  maxWidth:250, minHeight: 180, maxHeight: 180)
+        .frame(minWidth: 180,  maxWidth:250, minHeight: 180, maxHeight: 180)
         .padding(.horizontal)
         .padding(.vertical, 10)
     }
@@ -129,6 +139,7 @@ struct CardDetailExpand_Previews: PreviewProvider {
             CardDetailExpand(device: devicesData[0]).previewDevice("iPad Pro (11-inch)")
             CardDetailExpand(device: devicesData[0]).previewDevice("iPhone Xs").colorScheme(.dark)
             CardDetailExpand(device: devicesData[0]).previewDevice("iPhone Xs Max")
+            CardDetailExpand(device: devicesData[0]).previewLayout(.fixed(width: 320, height: 400))
         }
     }
 }

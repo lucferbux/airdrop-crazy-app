@@ -7,7 +7,6 @@
 //
 
 import XCTest
-@testable import Airdrop_Tool
 
 class Airdrop_ToolTests: XCTestCase {
 

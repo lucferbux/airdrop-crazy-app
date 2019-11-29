@@ -21,6 +21,8 @@ struct BleDevices: View {
     @State var menuFilter: [Menu] = ResultViewModel().menu
     @State var viewState = CGSize.zero
     @State var spin = false
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass: UserInterfaceSizeClass
+    
     var devices: Devices = [] // Mockup data
     var devicesFiltered: Devices {
         self.devicesList.devices.filter { device in
@@ -53,35 +55,45 @@ struct BleDevices: View {
                             CardDetailExpand(device: device)
                         }
                     } else {
-                        ForEach(devicesFiltered.chunked(into: 2), id: \.self){ devChunked in
-                            HStack(spacing: 100) {
-                                ForEach(devChunked) { dev in
-                                    CardDetailExpand(device: dev)
+                        if horizontalSizeClass == .regular {
+                            ForEach(devicesFiltered.chunked(into: 2), id: \.self){ devChunked in
+                                HStack(spacing: 60) {
+                                    ForEach(devChunked) { dev in
+                                        CardDetailExpand(device: dev)
+                                    }
                                 }
                             }
+                        } else { // compact
+                            ForEach(devicesFiltered) { device in
+                                CardDetailExpand(device: device)
+                            }
                         }
-                        
                     }
-                    
-                                        
-                    
-                    
                     Spacer()
                     
                 }
                 .blur(radius: show ? 100 : 0)
-                
+                .onTapGesture {
+                    if(self.show) {
+                        self.show.toggle()
+                    }
+                }
             }
             
             
-            
-            
-            AirplayView(devicesList: devicesList)
-                .offset(x: UIScreen.main.bounds.width/2 - 40, y: -UIScreen.main.bounds.height/2 + 84)
-            
-            QrCodeView(devicesList: devicesList)
-                .offset(x: UIScreen.main.bounds.width/2 - 95, y: -UIScreen.main.bounds.height/2 + 84)
-            
+            VStack {
+                HStack {
+                    Spacer()
+                    HStack(spacing: 10) {
+                        QrCodeView(devicesList: devicesList)
+                        AirplayView(devicesList: devicesList)
+                    }
+                    .offset(x: 0, y: 60)
+                    .padding(.trailing, 10)
+                    
+                }
+                Spacer()
+            }
             
             
             MenuButton(show: $show)
@@ -93,15 +105,15 @@ struct BleDevices: View {
                 
                 .offset(x: viewState.width)
                 .rotation3DEffect(Angle(degrees: show ? 0 : 60), axis: (x: 0, y: 10.0, z: 0))
-                .animation(.easeInOut(duration: 0.3))
+                .animation(.default)
                 .offset(x: show ? 0 : -UIScreen.main.bounds.width)
-//                .onTapGesture {
-//                    self.show.toggle()
-//                }
+                //                .onTapGesture {
+                //                    self.show.toggle()
+                //                }
                 .gesture(
                     DragGesture()
-                    .onChanged { value in
-                        self.viewState = value.translation
+                        .onChanged { value in
+                            self.viewState = value.translation
                     }
                     .onEnded { value in
                         if self.viewState.width < 100 {
@@ -109,9 +121,7 @@ struct BleDevices: View {
                         }
                         self.viewState = .zero
                     }
-                )
-            
-            
+            )
             
             
             if(devicesList.loading) {
@@ -241,9 +251,15 @@ struct AirplayView: View {
                 self.showAirdrop.toggle()
                 
             }
-            .sheet(isPresented: self.$showAirdrop) {
-                AirdropDevices(peopleList: self.devicesList)
-                
+            .gesture(
+                LongPressGesture(minimumDuration: 1.5)
+                    .onEnded { _ in
+                        self.devicesList.fetchFaker()
+                }
+            )
+                .sheet(isPresented: self.$showAirdrop) {
+                    AirdropDevices(peopleList: self.devicesList)
+                    
             }
         }
     }
@@ -267,7 +283,6 @@ struct QrCodeView: View {
             .frame(width: 44, height: 44)
             .background(Color("primary"))
             .cornerRadius(20)
-            .padding(.trailing, 10)
             .shadow(color: Color("buttonShadow"), radius: 10, x: 0, y: 10)
             .onTapGesture {
                 self.showQR.toggle()

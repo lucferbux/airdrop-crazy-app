@@ -22,23 +22,36 @@ final class ResultViewModel: ObservableObject {
     @Published var people: People = []
     @Published var error: Bool = false
     @Published var loading: Bool = false
+    @Published var isPotrait: Bool = false
     
 
-    init() {}
+    init() {
+        // Somewhere in your model init code
+        NotificationCenter.default.addObserver(self, selector: #selector(self.rotated), name: UIDevice.orientationDidChangeNotification, object: nil)
+
+    }
     
+    @objc func rotated() {
+        self.isPotrait =  UIDevice.current.orientation.isPortrait
+    }
     
     /// Add the url of the server in order to perform the connection
     /// - Parameter url: The url of the local server to connect
     func upDateServiceUrl(url: String) {
         saveUrl(url: url)
-        webService.setServer(url: url) { (devices, people, error) in
-            if(!error){
-                self.devices = devices
-                self.people = people
+        DispatchQueue.global().async {
+            self.webService.setServer(url: url) { (devices, people, error) in
+                if(!error){
+                    DispatchQueue.main.async {
+                        self.devices = devices
+                        self.people = people
+                    }
+                }
+                self.error = error
+                self.loading = false
             }
-            self.error = error
-            self.loading = false
         }
+        
     }
     
     func saveUrl(url: String) {

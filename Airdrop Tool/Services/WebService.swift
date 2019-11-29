@@ -43,7 +43,6 @@ class WebService {
             } catch {
                 print(error)
             }
-            
         }
 
         self.socket.connect()

@@ -30,6 +30,10 @@
 		E9A9756B2359BD0400D1DBB9 /* DeviceListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A9756A2359BD0400D1DBB9 /* DeviceListViewModel.swift */; };
 		E9A9756D2359D6B800D1DBB9 /* devicesMock.json in Resources */ = {isa = PBXBuildFile; fileRef = E9A9756C2359D6B800D1DBB9 /* devicesMock.json */; };
 		E9A97572235A0AB400D1DBB9 /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = E9A97571235A0AB400D1DBB9 /* SocketIO */; };
+		E9EE4FF023DF2B4A002D833A /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = E9EE4FEF23DF2B4A002D833A /* Lottie */; };
+		E9EE4FF423DF2D2E002D833A /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EE4FF323DF2D2E002D833A /* LottieView.swift */; };
+		E9EE506623DF33E5002D833A /* Loading.json in Resources */ = {isa = PBXBuildFile; fileRef = E9EE506523DF33E5002D833A /* Loading.json */; };
+		E9EE506823DF51F8002D833A /* scanner.json in Resources */ = {isa = PBXBuildFile; fileRef = E9EE506723DF51F8002D833A /* scanner.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +83,9 @@
 		E9A975682359BAB600D1DBB9 /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
 		E9A9756A2359BD0400D1DBB9 /* DeviceListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListViewModel.swift; sourceTree = "<group>"; };
 		E9A9756C2359D6B800D1DBB9 /* devicesMock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = devicesMock.json; sourceTree = "<group>"; };
+		E9EE4FF323DF2D2E002D833A /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
+		E9EE506523DF33E5002D833A /* Loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Loading.json; sourceTree = "<group>"; };
+		E9EE506723DF51F8002D833A /* scanner.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = scanner.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +94,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E9A97572235A0AB400D1DBB9 /* SocketIO in Frameworks */,
+				E9EE4FF023DF2B4A002D833A /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,6 +157,7 @@
 				E96F5B8C23560A7C00DAB977 /* SceneDelegate.swift */,
 				E927EB0E237A93F7000CB478 /* MenuView.swift */,
 				E96F5B8E23560A7C00DAB977 /* BleDevices.swift */,
+				E9EE4FF523DF31E4002D833A /* LottieAnimations */,
 				E9986234236604FC0069B4C7 /* CardPersonExpand.swift */,
 				E989858923621810008A4374 /* CardDetailExpand.swift */,
 				E99BCE5A2358742F00D8D2EA /* AirdropDevices.swift */,
@@ -156,6 +165,7 @@
 				E96F5B9523560A7D00DAB977 /* LaunchScreen.storyboard */,
 				E96F5B9823560A7D00DAB977 /* Info.plist */,
 				E96F5B9223560A7D00DAB977 /* Preview Content */,
+				E9EE4FF323DF2D2E002D833A /* LottieView.swift */,
 			);
 			path = "Airdrop Tool";
 			sourceTree = "<group>";
@@ -214,6 +224,15 @@
 			path = "View Models";
 			sourceTree = "<group>";
 		};
+		E9EE4FF523DF31E4002D833A /* LottieAnimations */ = {
+			isa = PBXGroup;
+			children = (
+				E9EE506723DF51F8002D833A /* scanner.json */,
+				E9EE506523DF33E5002D833A /* Loading.json */,
+			);
+			path = LottieAnimations;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -232,6 +251,7 @@
 			name = "Airdrop Tool";
 			packageProductDependencies = (
 				E9A97571235A0AB400D1DBB9 /* SocketIO */,
+				E9EE4FEF23DF2B4A002D833A /* Lottie */,
 			);
 			productName = "Airdrop Tool";
 			productReference = E96F5B8723560A7C00DAB977 /* Airdrop Crazy.app */;
@@ -307,6 +327,7 @@
 			mainGroup = E96F5B7E23560A7B00DAB977;
 			packageReferences = (
 				E9A97570235A0AB400D1DBB9 /* XCRemoteSwiftPackageReference "socket" */,
+				E9EE4FEE23DF2B4A002D833A /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = E96F5B8823560A7C00DAB977 /* Products */;
 			projectDirPath = "";
@@ -326,6 +347,8 @@
 			files = (
 				E96F5B9723560A7D00DAB977 /* LaunchScreen.storyboard in Resources */,
 				E99BCE60235874EF00D8D2EA /* personMock.json in Resources */,
+				E9EE506623DF33E5002D833A /* Loading.json in Resources */,
+				E9EE506823DF51F8002D833A /* scanner.json in Resources */,
 				E9A9756D2359D6B800D1DBB9 /* devicesMock.json in Resources */,
 				E96F5B9423560A7D00DAB977 /* Preview Assets.xcassets in Resources */,
 				E96F5B9123560A7D00DAB977 /* Assets.xcassets in Resources */,
@@ -360,6 +383,7 @@
 				E9986239236652380069B4C7 /* Result.swift in Sources */,
 				E96F5B8B23560A7C00DAB977 /* AppDelegate.swift in Sources */,
 				E9986235236604FC0069B4C7 /* CardPersonExpand.swift in Sources */,
+				E9EE4FF423DF2D2E002D833A /* LottieView.swift in Sources */,
 				E96B2C482360A5EC00EEFE7A /* QrScanner.swift in Sources */,
 				E96B2C4A2360A63200EEFE7A /* ScannerViewController.swift in Sources */,
 				E96F5B8D23560A7C00DAB977 /* SceneDelegate.swift in Sources */,
@@ -704,6 +728,14 @@
 				minimumVersion = 15.2.0;
 			};
 		};
+		E9EE4FEE23DF2B4A002D833A /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.5;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -711,6 +743,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E9A97570235A0AB400D1DBB9 /* XCRemoteSwiftPackageReference "socket" */;
 			productName = SocketIO;
+		};
+		E9EE4FEF23DF2B4A002D833A /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E9EE4FEE23DF2B4A002D833A /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

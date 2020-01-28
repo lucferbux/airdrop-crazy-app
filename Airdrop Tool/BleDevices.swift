@@ -21,7 +21,7 @@ struct BleDevices: View {
     @State var menuFilter: [Menu] = ResultViewModel().menu
     @State var viewState = CGSize.zero
     @State var spin = false
-    @Environment(\.horizontalSizeClass) var horizontalSizeClass: UserInterfaceSizeClass
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass: UserInterfaceSizeClass?
     
     var devices: Devices = [] // Mockup data
     var devicesFiltered: Devices {
@@ -125,23 +125,29 @@ struct BleDevices: View {
             
             
             if(devicesList.loading) {
+            
                 BlurView(style: .systemThinMaterial)
                     .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
                 VStack {
-                    Image(systemName: "arrow.2.circlepath.circle.fill")
-                        .resizable()
-                        .frame(width: 90, height: 90)
-                        .rotationEffect(.degrees(spin ? 360 : 0))
-                        .animation(Animation.easeIn(duration: 0.8).repeatForever(autoreverses: true))
-                        .onAppear() {
-                            self.spin.toggle()
-                    }
+//                    Image(systemName: "arrow.2.circlepath.circle.fill")
+//                        .resizable()
+//                        .frame(width: 90, height: 90)
+//                        .rotationEffect(.degrees(spin ? 360 : 0))
+//                        .animation(Animation.easeIn(duration: 0.8).repeatForever(autoreverses: true))
+//                        .onAppear() {
+//                            self.spin.toggle()
+//                    }
+                    LottieView(filename: "Loading")
+                        .frame(width: 300, height: 300)
+                        
+                    
                     Button(action: {
                         self.devicesList.loading = false
                     }) {
-                        Text("Cancelar")
+                        Text("Cancel")
                             .font(.headline)
                             .fontWeight(.bold)
+                            .foregroundColor(.black)
                     }
                     .padding()
                 }

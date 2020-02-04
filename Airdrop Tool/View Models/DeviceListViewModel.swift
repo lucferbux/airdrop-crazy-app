@@ -84,6 +84,7 @@ final class ResultViewModel: ObservableObject {
     /// Mock method to obtain data
     func fetchFaker() {
         self.devices = devicesData
+        self.people = personData
     }
     
     

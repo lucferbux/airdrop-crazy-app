@@ -3,7 +3,7 @@
 
 [![Swift Version][swift-image]][swift-url]
 [![License][license-image]][license-url]
-[![Platform](https://img.shields.io/cocoapods/p/LFAlertController.svg?style=flat)](http://cocoapods.org/pods/LFAlertController)
+
 
 This is the companion app of the [Airdrop Crazy Server](https://github.com/ElevenPaths/Airdrop-Crazy) for displaying the information in your phone remotely.
 

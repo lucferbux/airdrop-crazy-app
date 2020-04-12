@@ -147,6 +147,7 @@
 		E96F5B8923560A7C00DAB977 /* Airdrop Tool */ = {
 			isa = PBXGroup;
 			children = (
+				E9E00B7C2442555200FD1AE1 /* Extensions */,
 				E9A975672359BA7400D1DBB9 /* View Models */,
 				E95E372D23591B1500C748D9 /* Services */,
 				E99BCE5E235874D300D8D2EA /* Resources */,
@@ -222,6 +223,13 @@
 				E9A9756A2359BD0400D1DBB9 /* DeviceListViewModel.swift */,
 			);
 			path = "View Models";
+			sourceTree = "<group>";
+		};
+		E9E00B7C2442555200FD1AE1 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		E9EE4FF523DF31E4002D833A /* LottieAnimations */ = {

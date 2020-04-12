@@ -14,7 +14,17 @@ extension Array {
             Array(self[$0 ..< Swift.min($0 + size, count)])
         }
     }
+    
+    func split() -> (left: [Element], right: [Element]) {
+        let ct = self.count
+        let half = ct / 2
+        let leftSplit = self[0 ..< half]
+        let rightSplit = self[half ..< ct]
+        return (left: Array(leftSplit), right: Array(rightSplit))
+    }
 }
+
+
 
 struct BleDevices: View {
     @ObservedObject var devicesList = ResultViewModel()
@@ -34,11 +44,64 @@ struct BleDevices: View {
         }
     }
     
+    var deviceSplited: (Devices, Devices) {
+        devicesFiltered.split()
+    }
     
     @State var show = false
     
     func refreshView() {
         self.devicesList.updateSession()
+    }
+    
+    
+    
+    func getHoveredCard(device: Device) -> AnyView {
+        if #available(iOS 13.4, *) {
+            return AnyView(
+                CardDetailHover(device: device)
+                .animation(.default)
+            )
+        } else {
+            return AnyView(CardDetailExpand(device: device))
+        }
+    }
+    
+    func getHoveredQR(deviceList: ResultViewModel) -> AnyView {
+        if #available(iOS 13.4, *) {
+            return AnyView(
+                QrCodeView(devicesList: devicesList).hoverEffect(.highlight)
+                
+            )
+        } else {
+            return AnyView(
+                QrCodeView(devicesList: devicesList)
+            )
+        }
+    }
+    
+    func getHoveredAirplay(deviceList: ResultViewModel) -> AnyView {
+        if #available(iOS 13.4, *) {
+            return AnyView(
+                AirplayView(devicesList: devicesList).hoverEffect(.highlight)
+            )
+        } else {
+            return AnyView(
+                AirplayView(devicesList: devicesList)
+            )
+        }
+    }
+    
+    func getHoveredButton(deviceList: ResultViewModel) -> AnyView {
+        if #available(iOS 13.4, *) {
+            return AnyView(
+                CancelButton(deviceList: deviceList).hoverEffect()
+            )
+        } else {
+            return AnyView(
+                CancelButton(deviceList: deviceList)
+            )
+        }
     }
     
     var body: some View {
@@ -55,19 +118,22 @@ struct BleDevices: View {
                             CardDetailExpand(device: device)
                         }
                     } else {
+                        // iPad
                         if horizontalSizeClass == .regular {
                             ForEach(devicesFiltered.chunked(into: 2), id: \.self){ devChunked in
-                                HStack(spacing: 60) {
+                                HStack(spacing: 20) {
                                     ForEach(devChunked) { dev in
-                                        CardDetailExpand(device: dev)
+                                        self.getHoveredCard(device: dev)
                                     }
                                 }
                             }
                         } else { // compact
                             ForEach(devicesFiltered) { device in
-                                CardDetailExpand(device: device)
+                                self.getHoveredCard(device: device)
+
                             }
                         }
+                        
                     }
                     Spacer()
                     
@@ -85,8 +151,8 @@ struct BleDevices: View {
                 HStack {
                     Spacer()
                     HStack(spacing: 10) {
-                        QrCodeView(devicesList: devicesList)
-                        AirplayView(devicesList: devicesList)
+                        getHoveredQR(deviceList: devicesList)
+                        getHoveredAirplay(deviceList: devicesList)
                     }
                     .offset(x: 0, y: 60)
                     .padding(.trailing, 10)
@@ -125,31 +191,14 @@ struct BleDevices: View {
             
             
             if(devicesList.loading) {
-            
+                
                 BlurView(style: .systemThinMaterial)
                     .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
                 VStack {
-//                    Image(systemName: "arrow.2.circlepath.circle.fill")
-//                        .resizable()
-//                        .frame(width: 90, height: 90)
-//                        .rotationEffect(.degrees(spin ? 360 : 0))
-//                        .animation(Animation.easeIn(duration: 0.8).repeatForever(autoreverses: true))
-//                        .onAppear() {
-//                            self.spin.toggle()
-//                    }
                     LottieView(filename: "Loading")
                         .frame(width: 300, height: 300)
-                        
-                    
-                    Button(action: {
-                        self.devicesList.loading = false
-                    }) {
-                        Text("Cancel")
-                            .font(.headline)
-                            .fontWeight(.bold)
-                            .foregroundColor(.black)
-                    }
-                    .padding()
+                                    
+                    getHoveredButton(deviceList: devicesList)
                 }
             }
             
@@ -166,6 +215,20 @@ struct BleDevices: View {
             self.refreshView()
         }
         
+    }
+}
+
+
+@available(iOS 13.4, *)
+struct CardDetailHover: View {
+    @State private var over = false
+    var device: Device
+    var body: some View  {
+        CardDetailExpand(device: device)
+            .scaleEffect(over ? 1.05 : 1.0)
+            .onHover{ over in
+                self.over = over
+            }
     }
 }
 
@@ -241,34 +304,33 @@ struct AirplayView: View {
     @State var showQR = false
     
     var body: some View {
-        HStack {
-            VStack {
-                Image(systemName: "airplayaudio")
-                    .resizable()
-                    .padding(9)
+        VStack {
+            Image(systemName: "airplayaudio")
+                .resizable()
+                .padding(9)
+        }
+        .frame(width: 44, height: 44)
+        .background(Color("secondary"))
+        .foregroundColor(.white)
+        .cornerRadius(30)
+            
+        .shadow(color: Color("buttonShadow"), radius: 10, x: 0, y: 10)
+        .onTapGesture {
+            self.showAirdrop.toggle()
+            
+        }
+        .gesture(
+            LongPressGesture(minimumDuration: 1.5)
+                .onEnded { _ in
+                    self.devicesList.fetchFaker()
             }
-            .frame(width: 44, height: 44)
-            .background(Color("secondary"))
-            .foregroundColor(.white)
-            .cornerRadius(20)
+        )
+            .sheet(isPresented: self.$showAirdrop) {
+                AirdropDevices(peopleList: self.devicesList)
                 
-            .shadow(color: Color("buttonShadow"), radius: 10, x: 0, y: 10)
-            .onTapGesture {
-                self.showAirdrop.toggle()
-                
-            }
-            .gesture(
-                LongPressGesture(minimumDuration: 1.5)
-                    .onEnded { _ in
-                        self.devicesList.fetchFaker()
-                }
-            )
-                .sheet(isPresented: self.$showAirdrop) {
-                    AirdropDevices(peopleList: self.devicesList)
-                    
-            }
         }
     }
+    
 }
 
 struct QrCodeView: View {
@@ -277,42 +339,41 @@ struct QrCodeView: View {
     @State var showQR = false
     
     var body: some View {
-        HStack {
-            //            if(devicesList.devices.isEmpty) {
-            VStack {
-                Image(systemName: "qrcode")
-                    .resizable()
-                    .padding(10)
-                
-            }
-            .foregroundColor(.white)
-            .frame(width: 44, height: 44)
-            .background(Color("primary"))
-            .cornerRadius(20)
-            .shadow(color: Color("buttonShadow"), radius: 10, x: 0, y: 10)
-            .onTapGesture {
-                self.showQR.toggle()
-            }
-            .gesture(
-                LongPressGesture(minimumDuration: 1.5)
-                    .onEnded { _ in
-                        self.devicesList.loading = true
-                        self.devicesList.updateSession()
-                }
-            )
-                .sheet(isPresented: self.$showQR) {
-                    QRCodeScan() { (url) in
-                        self.devicesList.loading = true
-                        self.devicesList.upDateServiceUrl(url: url as String)
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                            self.devicesList.fetchDevices()
-                        }
-                        
-                    }
-            }
+        
+        VStack {
+            Image(systemName: "qrcode")
+                .resizable()
+                .padding(10)
+                .background(Color("primary"))
+                .cornerRadius(30)
             
-            //            }
         }
+        .foregroundColor(.white)
+        .frame(width: 44, height: 44)
+        
+        .shadow(color: Color("buttonShadow"), radius: 10, x: 0, y: 10)
+        .onTapGesture {
+            self.showQR.toggle()
+        }
+        .gesture(
+            LongPressGesture(minimumDuration: 1.5)
+                .onEnded { _ in
+                    self.devicesList.loading = true
+                    self.devicesList.updateSession()
+            }
+        )
+            .sheet(isPresented: self.$showQR) {
+                QRCodeScan() { (url) in
+                    self.devicesList.loading = true
+                    self.devicesList.upDateServiceUrl(url: url as String)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                        self.devicesList.fetchDevices()
+                    }
+                    
+                }
+        }
+        
+        
     }
 }
 
@@ -324,5 +385,21 @@ struct ContentView_Previews: PreviewProvider {
             BleDevices(devices: devicesData).previewDevice("iPad Pro (11-inch)")
         }
         
+    }
+}
+
+struct CancelButton: View {
+    var deviceList: ResultViewModel
+    
+    var body: some View {
+        Button(action: {
+            self.deviceList.loading = false
+        }) {
+            Text("Cancel")
+                .font(.headline)
+                .fontWeight(.bold)
+                .foregroundColor(.black)
+        }
+        .padding(.horizontal)
     }
 }
